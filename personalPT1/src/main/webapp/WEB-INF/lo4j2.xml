@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+<Configuration status="error">
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout>
+				<MarkerPatternSelector defaultPattern="%p %d{yyyy-MM-dd HH:mm:ss} [%logger:%L] - %m%n">
+					<PatternMatch key="CLASS" pattern="%p %d{yyyy-MM-dd HH:mm:ss} [%class:%L] - %m%n"/>
+				</MarkerPatternSelector>
+			</PatternLayout>
+		</Console>
+	</Appenders>
+	<Loggers>
+		<!-- DEVJS:TODO:S:개발한정 DEBUG레벨 -배포시 INFO로 변경요망-->
+		<Root level="INFO">
+			<AppenderRef ref="Console" />
+		</Root>
+		<Logger name="org.springframework" level="INFO" additivity="false">
+			<AppenderRef ref="Console"/>
+		</Logger>
+		<!-- DEVJS:TODO:E:개발한정 DEBUG레벨 -배포시 INFO로 변경요망-->
+		
+		<Logger name="org.mybatis.spring" level="INFO" additivity="false">
+			<AppenderRef ref="Console"/>
+		</Logger>
+		
+		<!-- <Logger name="jdbc.sqlonly" level="INFO" additivity="false">
+			<AppenderRef ref="Console"/>
+		</Logger> -->
+		<!-- <Logger name="jdbc.resultsettable" level="INFO" additivity="false">
+			<AppenderRef ref="Console"/>
+		</Logger> -->
+		<Logger name="jdbc.sqlonly" level="OFF"/>
+		<Logger name="jdbc.resultsettable" level="OFF"/>
+		
+		<Logger name="jdbc.sqltiming" level="OFF"/>
+		<Logger name="jdbc.connection" level="OFF"/>
+		<Logger name="jdbc.audit" level="OFF"/>
+		<Logger name="jdbc.resultset" level="OFF"/>
+		<Logger name="com.zaxxer.hikari" level="OFF"/>
+	</Loggers>
+</Configuration>

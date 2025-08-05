@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+	
+	<bean id="mvcHandlerMappingIntrospector" class="org.springframework.web.servlet.handler.HandlerMappingIntrospector"/>
+	<bean id="webSecurityExpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
+	
+	<security:http auto-config="true" use-expressions="true" disable-url-rewriting="true" authentication-manager-ref="authManager">
+		<security:csrf/>
+		<security:intercept-url pattern="/" access="permitAll" />
+		<security:intercept-url pattern="/error" access="permitAll" />
+		<security:intercept-url pattern="/js/**" access="permitAll" />
+		<security:intercept-url pattern="/css/**" access="permitAll" />
+		<security:intercept-url pattern="/img/**" access="permitAll" />
+		<security:intercept-url pattern="/font/**" access="permitAll" />
+		
+		<!-- 비로그인 상태만 로그인 화면 접근 허용 -->
+		<security:intercept-url pattern="/login" access="isAnonymous()" />
+		<security:intercept-url pattern="/signUp" access="isAnonymous()" />
+		
+		<!-- 권한 종류에 따라 접근 허용 -->
+		<security:intercept-url pattern="/index" access="isAuthenticated()" />
+		<security:intercept-url pattern="/attach/**" access="isAuthenticated()" />
+		<!-- DEVJS:S:TODO:차후 삭제필요 - 회원이관시 비밀번호 없는 상태코드 I인 계정 전용 처리 전용 -->
+		<security:intercept-url pattern="/reqAuth" access="hasRole('ROLE_REQAUTH')" />
+		<!-- DEVJS:E:TODO:차후 삭제필요 - 회원이관시 비밀번호 없는 상태코드 I인 계정 전용 처리 전용 -->
+		<security:intercept-url pattern="/mng/index" access="hasRole('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/frt/index" access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/frt/myPage" access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/frt/myPage/write" access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/frt/myPage/update" access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/frt/srchRslt" access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/mng/**" access="hasRole('ROLE_ADMIN') and @authorizationChecker.check(request, authentication)" />
+		<security:intercept-url pattern="/frt/**" access="hasRole('ROLE_USER') and @authorizationChecker.check(request, authentication)" />
+		<!-- 권한이 없어서 금지된 URI 접속할 때 보여줄 페이지(403 에러 페이지 대체) -->
+		<security:access-denied-handler error-page="/error" />
+		<security:form-login
+			login-page="/login"
+			username-parameter="acnt_id"
+			password-parameter="acnt_pw"
+			login-processing-url="/loginProc"
+			default-target-url="/index"
+			always-use-default-target="true"
+			authentication-success-handler-ref="authenticationSuccessHandler"
+			authentication-failure-handler-ref="authenticationFailureHandler"/>
+		<security:logout logout-url="/logout" logout-success-url="/login" invalidate-session="true" delete-cookies="JSESSIONID"/>
+		<security:session-management invalid-session-url="/login">
+			<security:concurrency-control max-sessions="1" expired-url="/login?msg=Duplicated"/>
+		</security:session-management>
+	</security:http>
+	
+	<bean id="authenticationSuccessHandler" class="ri.base.CustomAuthenticationSuccessHandler" />
+	<bean id="authenticationFailureHandler" class="ri.base.CustomAuthenticationFailureHandler"/>
+	
+	<!-- 로그인 인증 처리 서비스 지정 -->
+	<security:authentication-manager id="authManager">
+		<security:authentication-provider ref="customAuthenticationProvider"/>
+		<security:authentication-provider user-service-ref="acntService">
+			<!-- BCrypt 해시 함수를 이용하여 비밀번호를 저장. encode, matches 메서드로 각각 평문 해시화 기능과 해시결과 일치여부 확인 기능 -->
+			<security:password-encoder ref="bcryptPasswordEncoder"/>
+		</security:authentication-provider>
+	</security:authentication-manager>
+	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+	
+</beans>
