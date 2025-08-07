@@ -29,12 +29,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		String acnt_pw = (String) authentication.getCredentials();
 		AcntVO acntVO = (AcntVO) acntService.loadUserByUsername(acnt_id);
 		if(!passwordEncoder.matches(acnt_pw, acntVO.getAcnt_pw())) {
-			/*DEVJS:S:TODO:차후 삭제필요 - 회원이관시 비밀번호 없는 상태코드 I인 계정 전용 처리 전용*/
-			/*비번 틀리면 I스탯인 경우를 제외하고 익셉션*/
-			if(!"I".equals(acntVO.getAcnt_stat_cd())) {
-			/*DEVJS:E:TODO:차후 삭제필요 - 회원이관시 비밀번호 없는 상태코드 I인 계정 전용 처리 전용*/
-				throw new BadCredentialsException("");
-			}
+			throw new BadCredentialsException("");
 		}
 		if(!acntVO.isAccountNonLocked()) {
 			throw new LockedException("");
