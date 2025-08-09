@@ -36,7 +36,7 @@ public class AcntVO implements UserDetails, Serializable{
 		}else {
 			authorities.add(new SimpleGrantedAuthority("ROLE_USER")); //일반회원:N
 		}
-		return null;
+		return authorities;
 	}
 
 	@Override
