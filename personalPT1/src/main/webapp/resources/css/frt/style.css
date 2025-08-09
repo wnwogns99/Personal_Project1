@@ -1,0 +1,323 @@
+/* ------------------------------
+   1. 기본 리셋
+------------------------------ */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+	font-family: 'Segoe UI', Arial, sans-serif;
+	background-color: #f7f7f7;
+	color: #333;
+}
+ol, ul {
+	list-style: none;
+}
+a {
+	color: inherit;
+	text-decoration: none;
+}
+button {
+	cursor: pointer;
+	border: none;
+	background: none;
+}
+input, textarea, select, button {
+	font-family: inherit;
+}
+
+/* ------------------------------
+   2. 공통 레이아웃
+------------------------------ */
+.wrap {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 20px;
+}
+header {
+	background-color: #333;
+	color: #fff;
+	padding: 15px 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+header h1 {
+	font-size: 20px;
+}
+header nav ul {
+	display: flex;
+	gap: 20px;
+}
+header nav a {
+	color: #fff;
+	font-weight: bold;
+}
+header nav a:hover {
+	text-decoration: underline;
+}
+.page-title {
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+/* ------------------------------
+   3. 폼 요소
+------------------------------ */
+.form-group {
+	margin-bottom: 16px;
+}
+.form-group label {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 6px;
+}
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="email"],
+.form-group textarea,
+.form-group select {
+	width: 100%;
+	padding: 8px 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+textarea {
+	resize: vertical;
+}
+
+/* ------------------------------
+   4. 버튼 스타일
+------------------------------ */
+.btn {
+	display: inline-block;
+	padding: 8px 16px;
+	border-radius: 4px;
+	font-size: 14px;
+	text-align: center;
+}
+.btn.primary { background-color: #007bff; color: #fff; }
+.btn.primary:hover { background-color: #0056b3; }
+.btn.success { background-color: #28a745; color: #fff; }
+.btn.success:hover { background-color: #1e7e34; }
+.btn.danger { background-color: #dc3545; color: #fff; }
+.btn.danger:hover { background-color: #b21f2d; }
+.btn.secondary { background-color: #6c757d; color: #fff; }
+.btn.secondary:hover { background-color: #545b62; }
+
+/* ------------------------------
+   5. 테이블 스타일 (DataTables 기본 포함)
+------------------------------ */
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+	background-color: #fff;
+}
+table th, table td {
+	padding: 10px;
+	border: 1px solid #ddd;
+	text-align: left;
+}
+table thead {
+	background-color: #f1f1f1;
+}
+table tbody tr:hover {
+	background-color: #f9f9f9;
+}
+
+/* ------------------------------
+   6. 로그인 / 인증 페이지 카드
+------------------------------ */
+.auth-card {
+	background-color: white;
+	padding: 40px;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.1);
+	width: 100%;
+	max-width: 400px;
+	margin: 80px auto;
+}
+.auth-card h1 {
+	text-align: center;
+	margin-bottom: 30px;
+	font-size: 24px;
+	color: #333;
+}
+.auth-links {
+	text-align: center;
+	margin-top: 14px;
+}
+.auth-links a {
+	color: #007bff;
+	font-size: 13px;
+	margin: 0 5px;
+}
+.auth-links a:hover {
+	text-decoration: underline;
+}
+
+/* ------------------------------
+   7. 검색창 + 버튼 영역
+------------------------------ */
+.search-container {
+	margin-bottom: 20px;
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+.search-container input[type="text"] {
+	flex: 1;
+	padding: 6px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+.search-container select {
+	padding: 6px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+/* ------------------------------
+   8. 태그 리스트 / 팝업
+------------------------------ */
+.tag-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-top: 10px;
+}
+.tag-item {
+	background: #e0e0e0;
+	border-radius: 20px;
+	padding: 5px 10px;
+	position: relative;
+	font-size: 14px;
+}
+.tag-item .remove-tag {
+	position: absolute;
+	top: -5px;
+	right: -5px;
+	background: red;
+	color: white;
+	border-radius: 50%;
+	width: 16px;
+	height: 16px;
+	font-size: 12px;
+	text-align: center;
+	line-height: 16px;
+	cursor: pointer;
+}
+#alphaButtons button {
+	padding: 6px 10px;
+	margin: 2px;
+	cursor: pointer;
+	border: 1px solid #ccc;
+	background-color: white;
+}
+#alphaButtons button.active {
+	background-color: #007bff;
+	color: white;
+	border-color: #007bff;
+}
+
+/* ------------------------------
+   9. 대표작 리스트
+------------------------------ */
+.work-list {
+	margin-top: 10px;
+	padding-left: 0;
+	list-style: none;
+}
+.work-input {
+	display: flex;
+	gap: 10px;
+	margin-top: 10px;
+}
+.work-input input {
+	flex: 1;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+.remove-work {
+	background: red;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	width: 30px;
+	cursor: pointer;
+}
+
+/* ------------------------------
+   10. 하단 버튼 영역
+------------------------------ */
+.form-actions {
+	position: relative;
+	margin-top: 40px;
+	height: 50px;
+}
+.delete-btn {
+	position: absolute;
+	left: 0;
+	background-color: #dc3545;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+.center-btns {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	gap: 10px;
+}
+.save-btn {
+	background-color: #007bff;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+.cancel-btn {
+	background-color: #6c757d;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+/* ------------------------------
+   11. 유틸리티 클래스
+------------------------------ */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.mt-20 { margin-top: 20px; }
+.mb-20 { margin-bottom: 20px; }

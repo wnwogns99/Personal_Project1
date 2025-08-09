@@ -36,8 +36,8 @@
 		<!-- DEVJS:E:TODO:차후 삭제필요 - 회원이관시 비밀번호 없는 상태코드 I인 계정 전용 처리 전용 -->
 		<security:intercept-url pattern="/mng/index" access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/frt/index" access="hasRole('ROLE_USER')" />
-		<security:intercept-url pattern="/mng/**" access="hasRole('ROLE_ADMIN') and @authorizationChecker.check(request, authentication)" />
-		<security:intercept-url pattern="/frt/**" access="hasRole('ROLE_USER') and @authorizationChecker.check(request, authentication)" />
+		<security:intercept-url pattern="/mng/**" access="hasRole('ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/frt/**" access="hasRole('ROLE_USER')" />
 		<!-- 권한이 없어서 금지된 URI 접속할 때 보여줄 페이지(403 에러 페이지 대체) -->
 		<security:access-denied-handler error-page="/error" />
 		<security:form-login

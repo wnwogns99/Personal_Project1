@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ri.mapper.AcntMapper">
+	
+	<resultMap id="acntResultMap" type="ri.vo.AcntVO">
+		<id property="acnt_seq" column="acnt_seq"/>
+		<result property="acnt_type" column="acnt_type"/>
+		<result property="acnt_id" column="acnt_id"/>
+		<result property="acnt_pw" column="acnt_pw"/>
+		<result property="acnt_name" column="acnt_name"/>
+		<result property="mail_addr" column="mail_addr"/>
+		<result property="tel_no" column="tel_no"/>
+		<result property="reg_dt" column="reg_dt" javaType="java.time.LocalDateTime"/>
+	</resultMap>
+	
+	<select id="selectAcntByAcntId" resultMap="acntResultMap">
+		SELECT
+			acnt_seq, acnt_type, acnt_id, acnt_pw, acnt_name, tel_no, reg_dt
+		FROM acnt
+		WHERE acnt_id = #{acntId}
+	</select>
+</mapper>
