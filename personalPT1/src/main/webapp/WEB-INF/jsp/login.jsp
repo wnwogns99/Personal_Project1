@@ -9,21 +9,33 @@
 <layout:default_layout>
 	<div class="auth-card">
 		<h1>작가 암기 저장소</h1>
-		<form action="/login" method="post">
+		<form:form action="/loginProc" method="post">
 			<div class="form-group">
 				<label for="userId">아이디</label>
-				<input type="text" id="userId" name="username" required>
+				<input type="text" id="acnt_id" name="acnt_id" required>
 			</div>
 			<div class="form-group">
 				<label for="password">비밀번호</label>
-				<input type="password" id="password" name="password" required>
+				<input type="password" id="acnt_pw" name="acnt_pw" required>
 			</div>
-			<button type="submit" class="btn primary w100">로그인</button>
-		</form>
+			<div class="btn-box">
+				<button type="submit" class="btn primary w100">로그인</button>
+			</div>
+		</form:form>
 		<div class="auth-links">
-			<a href="/find-id">아이디 찾기</a>
-			<a href="/find-password">비밀번호 찾기</a>
-			<a href="/signup">회원가입</a>
+			<a href="/findId">아이디 찾기</a>
+			<a href="/findPw">비밀번호 찾기</a>
+			<a href="/signUp">회원가입</a>
 		</div>
 	</div>
+<script nonce="${cspNonce}">
+	$(document).ready(function() {
+		const errorMessage = "${sessionScope.errorMessage}";
+		console.log(errorMessage);
+		if (errorMessage != '') {
+			alert(errorMessage);
+			<c:remove var="errorMessage" scope="session" />
+		}
+	});
+</script>
 </layout:default_layout>

@@ -15,12 +15,12 @@
 		<Root level="INFO">
 			<AppenderRef ref="Console" />
 		</Root>
-		<Logger name="org.springframework" level="INFO" additivity="true">
+		<Logger name="org.springframework" level="DEBUG" additivity="false">
 			<AppenderRef ref="Console"/>
 		</Logger>
 		<!-- DEVJS:TODO:E:개발한정 DEBUG레벨 -배포시 INFO로 변경요망-->
 		
-		<Logger name="org.mybatis.spring" level="INFO" additivity="true">
+		<Logger name="org.mybatis.spring" level="DEBUG" additivity="false">
 			<AppenderRef ref="Console"/>
 		</Logger>
 		

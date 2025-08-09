@@ -180,6 +180,9 @@ table tbody tr:hover {
 	text-decoration: underline;
 }
 
+.btn-box{
+	text-align: center;
+}
 /* ------------------------------
    7. 검색창 + 버튼 영역
 ------------------------------ */

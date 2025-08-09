@@ -29,6 +29,9 @@
 		<!-- 비로그인 상태만 로그인 화면 접근 허용 -->
 		<security:intercept-url pattern="/login" access="isAnonymous()" />
 		<security:intercept-url pattern="/signUp" access="isAnonymous()" />
+		<security:intercept-url pattern="/findId" access="isAnonymous()" />
+		<security:intercept-url pattern="/findPw" access="isAnonymous()" />
+		<security:intercept-url pattern="/signUp" access="isAnonymous()" />
 		
 		<!-- 권한 종류에 따라 접근 허용 -->
 		<security:intercept-url pattern="/index" access="isAuthenticated()" />
